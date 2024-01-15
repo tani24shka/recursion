@@ -1,0 +1,26 @@
+#include <bits/stdc++.h> 
+using namespace std;
+
+void sort(stack<int>& st) { 
+
+    if(st.empty()) return;
+    int temp = st.top();
+    st.pop();
+    sort(st);
+    stack<int> tmp;
+    while(!st.empty() && st.top() > temp){
+        tmp.push(st.top());
+        st.pop();
+    }
+    st.push(temp);
+    while(!tmp.empty()){
+        st.push(tmp.top());
+        tmp.pop();
+    }
+}
+
+stack<int> sortStack(stack<int> &s)
+{
+    sort(s);
+	return s;   
+}
