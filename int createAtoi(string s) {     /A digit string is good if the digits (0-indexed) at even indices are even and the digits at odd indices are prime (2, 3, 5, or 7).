@@ -1,0 +1,95 @@
+// class Solution {
+// public:
+// const int MOD=1000000007;
+//     bool even(long long n)
+//     {
+//         if(n%2==0)
+//         return true;
+//         return false;
+//     }
+//     bool prime(long long n)
+//     {
+//         if(n<=1)
+//         return true;
+//         for(int i=2;i<n;i++)
+//         {
+//             if(n%i==0)
+//             return false;
+//         }
+//         return true;
+//     }
+//     bool check(long long n)
+//     {
+//         int c=1;
+//         while(n!=0)
+//         {
+//             int d=n%10;
+//             if(c%2==0)
+//             {
+//                 if(even(n)!=true)
+//                 return false;
+//             }
+//             else
+//             {
+//                 if(prime(n)!=true)
+//                 return false;
+//             }
+//             c++;
+//             n=n/10;
+//         }
+//         return true;
+//     }
+//     int countGoodNumbers(long long n) {
+//        int count=1;
+//        for(int i=1;i<pow(10,n);i++)
+//        {
+//            if(check(i)==true)
+//            count++;
+//        }
+//        return count%MOD;
+//     }
+// };
+class Solution {
+public:
+    long long power(long long x, long long y, long long p)
+{
+ 
+    // Initialize answer
+    long long res = 1;
+ 
+    // Check till the number becomes zero
+    while (y > 0) {
+ 
+        // If y is odd, multiply x with result
+        if (y % 2 == 1)
+            res = (res * x)%p;
+ 
+        // y = y/2
+        y = y >> 1;
+ 
+        // Change x to x^2
+        x = (x * x)%p;
+    }
+    return res % p;
+}
+    int countGoodNumbers(long long n) {
+        long long ans = 1;
+        long long f=0,fiv  = 0;
+        long long mod = 1000000007;
+        if(n%2 ==0)
+        {
+            ans = power(20,n/2,mod);
+        }
+        else
+        {
+            long long f = n/2;
+            // f -> number of odd positions
+            long long fiv = n-f;
+            // fiv -> number of even positions
+            f = power(4,f,mod);
+            fiv = power(5,fiv,mod);
+            ans = (f*fiv)%mod;
+        }
+        return (int)ans;
+    }
+};
