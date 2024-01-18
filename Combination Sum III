@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int>v;
+        vector<vector<int>>ans;
+        recur(v,ans,1,k,n);
+        return ans;
+    }
+    void recur(vector<int>&v,vector<vector<int>>&ans,int i,int k,int n)
+    {
+        if(v.size()==k && n!=0)
+        return;
+         if(n==0 && v.size()==k)
+         {
+                 ans.push_back(v);
+                 return;
+         }
+        for(int x=i;x<=9;x++){
+        v.push_back(x);
+         recur(v,ans,x+1,k,n-x);
+         v.pop_back();
+        }}
+};
