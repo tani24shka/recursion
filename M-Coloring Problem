@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+
+bool isValid(int x, int ind, int row, int col, vector<int> &arr, vector<vector<int>> &mat, int m){
+
+    for(int j = 0; j < col; j++){
+
+        if(mat[ind][j]){
+
+            if(arr[j] == x) return false;
+
+        }
+
+    }
+
+    return true;
+
+}
+
+ 
+
+bool func(int ind, int row, int col, vector<int> &arr, vector<vector<int>> &mat, int m){
+
+    if(ind == row) return true;
+
+    for(int i = 0; i < m; i++){
+
+        if(isValid(i, ind, row, col, arr, mat, m)){
+
+            arr[ind] = i;
+
+            if(func(ind + 1, row, col, arr, mat, m)) return true;
+
+            arr[ind] = -1;
+
+        }
+
+    }
+
+    return false;
+
+}
+
+ 
+
+string graphColoring(vector<vector<int>> &mat, int m) {
+
+    // Write your code here
+
+    int row = mat.size();
+
+    int col = mat[0].size();
+
+    vector<int> arr(row, -1);
+
+    if(func(0, row, col, arr, mat, m)) return "YES";
+
+    return "NO";
+
+}
